@@ -13,15 +13,28 @@ for the Anvo Network Contract Development Toolkit (CDT).
 the canonical GitHub mirror of John R. Hauser's Berkeley SoftFloat library,
 maintained by the UC Berkeley Architecture Research group.
 
-This fork tracks `ucb-bar/berkeley-softfloat-3` directly and cherry-picks
-smart-contract-specific additions from the earlier EOSIO and AntelopeIO forks
-with original authorship preserved.
+This fork is based on the current upstream `master` (post-Release 3e) and
+cherry-picks smart-contract-specific additions from the earlier EOSIO and
+AntelopeIO forks with original authorship preserved. The previous
+AntelopeIO-based fork was pinned to Release 3e (January 2018) and had
+fallen years behind upstream.
 
-## Additions Over Upstream
+## Upstream Improvements Over Release 3e
+
+By forking from the current upstream rather than the stale AntelopeIO fork,
+this repository includes 19 upstream commits that were never picked up by
+the EOSIO or AntelopeIO forks:
+
+- **BF16 (bfloat16) support** — new `bfloat16_t` type and conversion functions
+- **RISC-V build support** — `Linux-RISCV64-GCC` build target and specialization fixes
+- **ARM bug fix** — corrected `softfloat_propagateNaNF128M` for ARM-VFPv2-defaultNaN
+- **`exceptionflags` enumeration** — added typedef for exception flags
+- **CC override** — allows compiler override for RISC-V builds
+
+## CDT-Specific Additions
 
 The following changes have been applied on top of the upstream Berkeley
-SoftFloat (including post-3e upstream commits for BF16 support, RISC-V
-fixes, and build improvements):
+SoftFloat:
 
 | Change | Author | Origin |
 |--------|--------|--------|
