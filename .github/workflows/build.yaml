@@ -1,0 +1,52 @@
+name: "Build & Test"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: "${{ matrix.name }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "Ubuntu 22.04 x86_64"
+            runner: ubuntu-22.04
+          - name: "Ubuntu 24.04 x86_64"
+            runner: ubuntu-24.04
+          - name: "Ubuntu 22.04 ARM64"
+            runner: ubuntu-22.04-arm
+          - name: "Ubuntu 24.04 ARM64"
+            runner: ubuntu-24.04-arm
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake
+
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build -j $(nproc)
+
+      - name: Verify library
+        run: |
+          test -f build/libsoftfloat.a
+          echo "Library size: $(stat --format=%s build/libsoftfloat.a) bytes"
+          echo "Symbol count: $(nm build/libsoftfloat.a | grep -c ' T ')"

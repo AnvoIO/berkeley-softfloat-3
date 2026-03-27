@@ -1,5 +1,9 @@
 # berkeley-softfloat-3 — SoftFloat for WASM Smart Contracts
 
+[![Build & Test](https://github.com/AnvoIO/berkeley-softfloat-3/actions/workflows/build.yaml/badge.svg)](https://github.com/AnvoIO/berkeley-softfloat-3/actions/workflows/build.yaml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-orange.svg)](COPYING.txt)
+
 A fork of [Berkeley SoftFloat Release 3e](http://www.jhauser.us/arithmetic/SoftFloat.html)
 for the Anvo Network Contract Development Toolkit (CDT).
 
